@@ -1,0 +1,71 @@
+/* ─────────────────────────────────────────────────────────────────────────────
+   DESTINO: token/index.css
+   QUÉ CAMBIÓ: se añadió la clase .scrollable y se ocultaron los scrollbars
+                nativos en filas de scroll horizontal.
+   POR QUÉ: DiscoveryPage, TokenPage, AirdropPage y UserProfile usan
+            className="scrollable" pero esa clase no tenía definición CSS,
+            así que ninguna de esas pantallas hacía scroll.
+   ─────────────────────────────────────────────────────────────────────────── */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #0d0e14;
+  --fg: #e8e9f0;
+  --violet: #8b5cf6;
+  --violet-dim: #6d3fcf;
+  --cyan: #06d6f7;
+  --cyan-dim: #04a8c4;
+  --green: #10f090;
+  --red: #f05050;
+  --glass: rgba(255,255,255,0.05);
+  --glass-border: rgba(255,255,255,0.10);
+  --card-bg: rgba(20,21,32,0.85);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body, #root {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.font-mono {
+  font-family: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+}
+
+.glass {
+  background: var(--glass);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+}
+
+.glow-violet { box-shadow: 0 0 20px rgba(139,92,246,0.4); }
+.glow-cyan { box-shadow: 0 0 20px rgba(6,214,247,0.4); }
+
+/* ── SCROLL ──────────────────────────────────────────────────────────────── */
+
+/* Clase usada en DiscoveryPage, TokenPage, AirdropPage y UserProfile
+   para hacer scroll del contenido sin mover la BottomTabBar.            */
+.scrollable {
+  overflow-y: auto;
+  /* Scroll con inercia/momentum en iOS (World App usa WebKit) */
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Ocultar scrollbars nativos en toda la app (diseño limpio en mobile) */
+.scrollable::-webkit-scrollbar,
+.scrollable *::-webkit-scrollbar {
+  display: none;
+}
+.scrollable {
+  scrollbar-width: none;
+}
